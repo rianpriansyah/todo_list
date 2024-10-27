@@ -53,6 +53,22 @@ const clearTodos = () => {
   }
 };
 
+const filterTodos = (e) => {
+  const filterText = e.target.value.toLowerCase();
+  const todoItems = document.querySelectorAll(".todo-item");
+
+  todoItems.forEach((item) => {
+    const itemText = item.firstChild.textContent.toLowerCase();
+
+    if (itemText.indexOf(filterText) !== -1) {
+      item.setAttribute("style", "display: block;");
+    } else {
+      item.setAttribute("style", "display: none !important;");
+    }
+  });
+};
+
 todoForm.addEventListener("submit", addTodo);
 todoList.addEventListener("click", deleteTodo);
 clearButton.addEventListener("click", clearTodos);
+filterInput.addEventListener("keyup", filterTodos);
