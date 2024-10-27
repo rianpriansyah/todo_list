@@ -30,4 +30,14 @@ const addTodo = (e) => {
   todoList.appendChild(li);
 };
 
+const deleteTodo = (e) => {
+  e.preventDefault();
+
+  if (e.target.classList.contains("delete-todo")) {
+    const parent = e.target.parentElement;
+    parent.remove();
+  }
+};
+
 todoForm.addEventListener("submit", addTodo);
+todoList.addEventListener("click", deleteTodo);
