@@ -28,14 +28,18 @@ const addTodo = (e) => {
 
   // Memasukan element li yang telah dibuat dengan javascript ke dalam element todo list
   todoList.appendChild(li);
+
+  todoInput.value = "";
 };
 
 const deleteTodo = (e) => {
   e.preventDefault();
 
   if (e.target.classList.contains("delete-todo")) {
-    const parent = e.target.parentElement;
-    parent.remove();
+    if (confirm("Apakah anda yakin ingin menghapus?")) {
+      const parent = e.target.parentElement;
+      parent.remove();
+    }
   }
 };
 
