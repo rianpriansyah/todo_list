@@ -8,28 +8,32 @@ const clearButton = document.querySelector("#clear-todos");
 const addTodo = (e) => {
   e.preventDefault();
 
-  // Membuat li element
-  const li = document.createElement("li");
+  if (todoInput.value.trim()) {
+    // Membuat li element
+    const li = document.createElement("li");
 
-  // Menambahkan properti class pada li element
-  li.className = "list-group-item d-flex justify-content-between align-items-center mb-1 todo-item";
+    // Menambahkan properti class pada li element
+    li.className = "list-group-item d-flex justify-content-between align-items-center mb-1 todo-item";
 
-  // Menambahkan children ke dalam li element
-  li.appendChild(document.createTextNode(todoInput.value));
+    // Menambahkan children ke dalam li element
+    li.appendChild(document.createTextNode(todoInput.value));
 
-  // Membuat delete button
-  const a = document.createElement("a");
-  a.href = "#";
-  a.className = "badge badge-danger delete-todo";
-  a.innerHTML = "Delete";
+    // Membuat delete button
+    const a = document.createElement("a");
+    a.href = "#";
+    a.className = "badge badge-danger delete-todo";
+    a.innerHTML = "Delete";
 
-  // Menambahkan children a ke dalam li element
-  li.appendChild(a);
+    // Menambahkan children a ke dalam li element
+    li.appendChild(a);
 
-  // Memasukan element li yang telah dibuat dengan javascript ke dalam element todo list
-  todoList.appendChild(li);
+    // Memasukan element li yang telah dibuat dengan javascript ke dalam element todo list
+    todoList.appendChild(li);
 
-  todoInput.value = "";
+    todoInput.value = "";
+  } else {
+    alert("Todo input tidak boleh kosong!");
+  }
 };
 
 const deleteTodo = (e) => {
