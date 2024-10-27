@@ -40,12 +40,19 @@ const deleteTodo = (e) => {
   e.preventDefault();
 
   if (e.target.classList.contains("delete-todo")) {
-    if (confirm("Apakah anda yakin ingin menghapus?")) {
+    if (confirm("Apakah anda yakin ingin menghapus todo list?")) {
       const parent = e.target.parentElement;
       parent.remove();
     }
   }
 };
 
+const clearTodos = () => {
+  if (confirm("Apakah anda yakin ingin menghapus semua todo list?")) {
+    todoList.innerHTML = "";
+  }
+};
+
 todoForm.addEventListener("submit", addTodo);
 todoList.addEventListener("click", deleteTodo);
+clearButton.addEventListener("click", clearTodos);
