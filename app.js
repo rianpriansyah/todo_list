@@ -15,7 +15,7 @@ const addTodo = (e) => {
   li.className = "list-group-item d-flex justify-content-between align-items-center mb-1 todo-item";
 
   // Menambahkan children ke dalam li element
-  li.appendChild(document.createTextNode("Value dari task input"));
+  li.appendChild(document.createTextNode(todoInput.value));
 
   // Membuat delete button
   const a = document.createElement("a");
@@ -25,6 +25,9 @@ const addTodo = (e) => {
 
   // Menambahkan children a ke dalam li element
   li.appendChild(a);
+
+  // Memasukan element li yang telah dibuat dengan javascript ke dalam element todo list
+  todoList.appendChild(li);
 };
 
 todoForm.addEventListener("submit", addTodo);
