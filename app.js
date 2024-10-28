@@ -100,7 +100,13 @@ const deleteTodoLocalStorage = (deletedElement) => {
 const clearTodos = () => {
   if (confirm("Apakah anda yakin ingin menghapus semua todo list?")) {
     todoList.innerHTML = "";
+
+    clearTodosLocalStorage();
   }
+};
+
+const clearTodosLocalStorage = () => {
+  localStorage.clear();
 };
 
 const filterTodos = (e) => {
