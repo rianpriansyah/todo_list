@@ -5,6 +5,7 @@ const filterInput = document.querySelector("#filter-input");
 const todoList = document.querySelector("#todo-list");
 const clearButton = document.querySelector("#clear-todos");
 
+// DOM functions
 const addTodo = (e) => {
   e.preventDefault();
 
@@ -30,10 +31,26 @@ const addTodo = (e) => {
     // Memasukan element li yang telah dibuat dengan javascript ke dalam element todo list
     todoList.appendChild(li);
 
+    addTodoLocalStorage(todoInput.value);
+
     todoInput.value = "";
   } else {
     alert("Todo input tidak boleh kosong!");
   }
+};
+
+const addTodoLocalStorage = (todoInputValue) => {
+  let todos;
+
+  if (localStorage.getItem("todos") == null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+
+  todos.push(todoInputValue);
+
+  localStorage.setItem("todos", JSON.stringify(todos));
 };
 
 const deleteTodo = (e) => {
