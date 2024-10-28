@@ -79,8 +79,22 @@ const deleteTodo = (e) => {
     if (confirm("Apakah anda yakin ingin menghapus todo list?")) {
       const parent = e.target.parentElement;
       parent.remove();
+
+      deleteTodoLocalStorage(parent);
     }
   }
+};
+
+const deleteTodoLocalStorage = (deletedElement) => {
+  const todos = getItemFromLocalStorage();
+
+  todos.forEach((todo, index) => {
+    if (deletedElement.firstChild.textContent === todo) {
+      todos.splice(index, 1);
+    }
+  });
+
+  localStorage.setItem("todos", JSON.stringify(todos));
 };
 
 const clearTodos = () => {
