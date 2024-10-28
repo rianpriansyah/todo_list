@@ -6,6 +6,39 @@ const todoList = document.querySelector("#todo-list");
 const clearButton = document.querySelector("#clear-todos");
 
 // DOM functions
+const getTodos = () => {
+  let todos;
+
+  if (localStorage.getItem("todos") == null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+
+  todos.forEach((todo) => {
+    // Membuat li element
+    const li = document.createElement("li");
+
+    // Menambahkan properti class pada li element
+    li.className = "list-group-item d-flex justify-content-between align-items-center mb-1 todo-item";
+
+    // Menambahkan children ke dalam li element
+    li.appendChild(document.createTextNode(todo));
+
+    // Membuat delete button
+    const a = document.createElement("a");
+    a.href = "#";
+    a.className = "badge badge-danger delete-todo";
+    a.innerHTML = "Delete";
+
+    // Menambahkan children a ke dalam li element
+    li.appendChild(a);
+
+    // Memasukan element li yang telah dibuat dengan javascript ke dalam element todo list
+    todoList.appendChild(li);
+  });
+};
+
 const addTodo = (e) => {
   e.preventDefault();
 
@@ -85,7 +118,21 @@ const filterTodos = (e) => {
   });
 };
 
-todoForm.addEventListener("submit", addTodo);
-todoList.addEventListener("click", deleteTodo);
-clearButton.addEventListener("click", clearTodos);
-filterInput.addEventListener("keyup", filterTodos);
+const immediateLoadEventListener = () => {
+  // Mendapatkan todo list dari local storage dan menampilkan di browser
+  document.addEventListener("DOMContentLoaded", getTodos);
+
+  // EventListener untuk menambahkan todo list
+  todoForm.addEventListener("submit", addTodo);
+
+  // EventListener untuk menghapus satu todo list
+  todoList.addEventListener("click", deleteTodo);
+
+  // EventListener untuk menghapus semua todo list
+  clearButton.addEventListener("click", clearTodos);
+
+  // EventListener untuk memfilter todo list
+  filterInput.addEventListener("keyup", filterTodos);
+};
+
+immediateLoadEventListener();
